@@ -31,9 +31,8 @@ function addSearchBarHTML(){
 
     document.querySelector('#search-submit').addEventListener('click', (e)=>{
         e.preventDefault();
-         const searchInput = document.querySelector('input').value
-         search(document.querySelector('input'),searchInput )
-       
+        const searchInput = document.querySelector('input').value
+        search(document.querySelector('input'),searchInput )
     })
 
     document.querySelector('#search-input').addEventListener('keyup', (e)=>{
