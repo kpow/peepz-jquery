@@ -4,7 +4,7 @@ const galleryContainer = document.querySelector('.gallery')
 const modalContainer = document.querySelector('#modal')
 const errorContainer = document.querySelector('.error-container')
 // couple of vars to keep track
-let isPaging = false;
+let isPaging = false
 // place to store data from the api pull
 let userData = null
 // let keep track on which on is in the modal by its index in the searchlist
@@ -36,18 +36,19 @@ const checkStatus = (response) => {
 
 // functionto add search bar to DOM
 const addSearchBarHTML = () => {
-    const searchBar = `
+    return  `
     <form action="#" method="get">
         <input type="search" id="search-input" class="search-input" placeholder="Search...">
         <input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit">
     </form>
     `
-    // add to DOM
-    searchContainer.innerHTML = searchBar
+}
+
+const initSearch = () => {
 
     // event listener for when you click the submit button 
     document.querySelector('#search-submit').addEventListener('click', (e)=>{
-        e.preventDefault();
+        e.preventDefault()
         const searchInput = document.querySelector('input').value
         search(searchInput)
     })
@@ -56,6 +57,7 @@ const addSearchBarHTML = () => {
         const searchInput = document.querySelector('input').value
         search(searchInput)
      })
+
 }
 
 const generateCardsHTML = (data) => {
@@ -75,7 +77,7 @@ const generateCardsHTML = (data) => {
         `
     })
 
-    galleryContainer.innerHTML = html
+    return html
 
 }
 
@@ -112,7 +114,7 @@ const displayModal = (item, index) => {
     </div>
     `
     // add html to DOM
-    modalContainer.innerHTML = modal;
+    modalContainer.innerHTML = modal
     // only animate if the window is opening mot paging between
     if(!isPaging){
         document.querySelector('.modal-container').classList.add('fadeIn')
@@ -136,7 +138,7 @@ const nextPrevItem = (e) => {
     if(e.target.id === 'modal-next'){
         // if we are not on the last person move forward
         // stops it from animating
-        isPaging = true;
+        isPaging = true
         if(currentItemIndex < searchList.length-1){
             displayModal(userData[searchList[currentItemIndex+1]], currentItemIndex+1 )           
         // if we are on the last person go to the first one.
@@ -147,7 +149,7 @@ const nextPrevItem = (e) => {
     }else if(e.target.id === 'modal-prev'){
         //if we are not on the first one back it up
         // stops it from animating
-        isPaging = true;
+        isPaging = true
         if(currentItemIndex > 0){
             displayModal(userData[searchList[currentItemIndex-1]], currentItemIndex-1 ) 
         //if we are on the first one go to the last one
@@ -226,9 +228,11 @@ galleryContainer.addEventListener('click', (e) => {
 fetchData('https://randomuser.me/api/?results=12&nat=us')
 .then( data => {
     // populate the cards
-    generateCardsHTML(data.results)
+    galleryContainer.innerHTML = generateCardsHTML(data.results)
     // add the search bar
-    addSearchBarHTML();
+    searchContainer.innerHTML = addSearchBarHTML()
+    // initialize search
+    initSearch()
     // store the data so we can get to it later
     userData = data.results
     // add all items to the search array to initialize it
