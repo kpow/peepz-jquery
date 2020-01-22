@@ -19,6 +19,32 @@ body {
     background: rgba(235, 235, 235, 0.9);
 }
 
+.fadeIn{
+    animation-name: fadeIn;
+    animation-duration: 500ms;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+ } 
+
+ .fadeOut{
+    animation-name: fadeOut;
+    animation-duration: 500ms;
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+ } 
+
+.error-container{
+    position: relative;
+    top:100px;
+    color: red;
+}
+
 header {
     padding: 15px 5px 5px;
 }
@@ -29,9 +55,15 @@ header {
 }
 
 header h1 {
-    font-size: 1.25em;
-    color: rgba(50, 50, 50, 0.9);
-    margin-top: 35px;
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    background-color: #666666;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: rgba(245,245,245,0.5) 1px 3px 1px;
 }
 
 .search-input {
