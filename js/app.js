@@ -4,6 +4,7 @@ const galleryContainer = document.querySelector('.gallery')
 const modalContainer = document.querySelector('#modal')
 const errorContainer = document.querySelector('.error-container')
 // couple of vars to keep track
+let isPaging = false;
 // place to store data from the api pull
 let userData = null
 // let keep track on which on is in the modal by its index in the searchlist
@@ -12,7 +13,7 @@ let currentItemIndex
 let searchList = []
 
 // function to get and check status of data
-function fetchData(url){
+const fetchData = (url) => {
     return fetch(url)
             // check the http return code
             .then(checkStatus)
@@ -23,7 +24,7 @@ function fetchData(url){
 }
 
 // make sure we are actually connecting to server and getting the correct response
-function checkStatus(response){
+const checkStatus = (response) => {
     if(response.ok){
         // if we are all ok resolve
         return Promise.resolve(response)
@@ -34,7 +35,7 @@ function checkStatus(response){
 }
 
 // functionto add search bar to DOM
-function addSearchBarHTML(){
+const addSearchBarHTML = () => {
     const searchBar = `
     <form action="#" method="get">
         <input type="search" id="search-input" class="search-input" placeholder="Search...">
@@ -57,7 +58,7 @@ function addSearchBarHTML(){
      })
 }
 
-function generateCardsHTML(data){
+const generateCardsHTML = (data) => {
     let html = ''
     data.map((item, index) =>{
         html += `
@@ -79,7 +80,7 @@ function generateCardsHTML(data){
 }
 
 // function to display the lightbox with navigation arrows
-function displayModal(item, index){
+const displayModal = (item, index) => {
     // keep track of current item in modal by index number
     currentItemIndex = parseInt(index)
     // build a modal string and populate it with data
@@ -112,9 +113,12 @@ function displayModal(item, index){
     `
     // add html to DOM
     modalContainer.innerHTML = modal;
-    document.querySelector('.modal-container').classList.add('fadeIn')
+    if(!isPaging){
+        document.querySelector('.modal-container').classList.add('fadeIn')
+    }
     // close button click event for modal event listener
     document.querySelector('#modal-close-btn').addEventListener('click', e =>  {
+        isPaging = false
         document.querySelector('.modal-container').classList.add('fadeOut')
         setTimeout( () => modalContainer.innerHTML = '', 450)
         
@@ -125,11 +129,12 @@ function displayModal(item, index){
 }
 
 // function to move back and forth through peeps in the modal
-function nextPrevItem(e){
+const nextPrevItem = (e) => {
     // do this for the next button
     if(e.target.id === 'modal-next'){
         // if we are not on the last person move forward
         if(currentItemIndex < searchList.length-1){
+            isPaging = true;
             displayModal(userData[searchList[currentItemIndex+1]], currentItemIndex+1 )           
         // if we are on the last person go to the first one.
         }else if(currentItemIndex >= searchList.length-1){
@@ -148,7 +153,7 @@ function nextPrevItem(e){
 }
 
 // dirty little function to grab an ID from the div
-function getTargetID(e){
+const getTargetID = (e) => {
     // set up var to return with value
     let itemID
 
