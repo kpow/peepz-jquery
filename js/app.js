@@ -113,11 +113,13 @@ const displayModal = (item, index) => {
     `
     // add html to DOM
     modalContainer.innerHTML = modal;
+    // only animate if the window is opening mot paging between
     if(!isPaging){
         document.querySelector('.modal-container').classList.add('fadeIn')
     }
     // close button click event for modal event listener
     document.querySelector('#modal-close-btn').addEventListener('click', e =>  {
+        // reset paging
         isPaging = false
         document.querySelector('.modal-container').classList.add('fadeOut')
         setTimeout( () => modalContainer.innerHTML = '', 450)
@@ -133,23 +135,23 @@ const nextPrevItem = (e) => {
     // do this for the next button
     if(e.target.id === 'modal-next'){
         // if we are not on the last person move forward
+        // stops it from animating
+        isPaging = true;
         if(currentItemIndex < searchList.length-1){
-            isPaging = true;
             displayModal(userData[searchList[currentItemIndex+1]], currentItemIndex+1 )           
         // if we are on the last person go to the first one.
         }else if(currentItemIndex >= searchList.length-1){
-            isPaging = true;
             displayModal(userData[searchList[0]], 0 ) 
         }
     // this is the previous button     
     }else if(e.target.id === 'modal-prev'){
         //if we are not on the first one back it up
+        // stops it from animating
+        isPaging = true;
         if(currentItemIndex > 0){
-            isPaging = true;
             displayModal(userData[searchList[currentItemIndex-1]], currentItemIndex-1 ) 
         //if we are on the first one go to the last one
         }else if(currentItemIndex === 0){
-            isPaging = true;
             displayModal(userData[searchList[searchList.length-1]], searchList.length ) 
         }   
     }
@@ -205,7 +207,7 @@ const search = (name) => {
  }
 
 // event listener for clicking in people cards
-galleryContainer.addEventListener('click', e => {
+galleryContainer.addEventListener('click', (e) => {
     // only click if its a card
     if( e.target.className.includes('card') ){
         // get the current ID from the id attribute
