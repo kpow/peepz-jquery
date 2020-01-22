@@ -138,15 +138,18 @@ const nextPrevItem = (e) => {
             displayModal(userData[searchList[currentItemIndex+1]], currentItemIndex+1 )           
         // if we are on the last person go to the first one.
         }else if(currentItemIndex >= searchList.length-1){
+            isPaging = true;
             displayModal(userData[searchList[0]], 0 ) 
         }
     // this is the previous button     
     }else if(e.target.id === 'modal-prev'){
         //if we are not on the first one back it up
         if(currentItemIndex > 0){
+            isPaging = true;
             displayModal(userData[searchList[currentItemIndex-1]], currentItemIndex-1 ) 
         //if we are on the first one go to the last one
         }else if(currentItemIndex === 0){
+            isPaging = true;
             displayModal(userData[searchList[searchList.length-1]], searchList.length ) 
         }   
     }
