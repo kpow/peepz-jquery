@@ -225,7 +225,7 @@ galleryContainer.addEventListener('click', (e) => {
 })
 
 // lets start this party here by grabbing some data
-fetchData('https://randomuser.me/api/?results=12&nat=us')
+fetchData('https://randomuser.me/api/?results=120&nat=us')
 .then( data => {
     // populate the cards
     galleryContainer.innerHTML = generateCardsHTML(data.results)
