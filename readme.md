@@ -1,6 +1,6 @@
 **people directory**
 
-demo:  https://kpow.github.io/peeps-jquery/
+demo:  https://kpow.github.io/peepz-jquery/
 
 # The Peepz
 
