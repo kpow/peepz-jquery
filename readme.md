@@ -19,9 +19,6 @@ To get running locally:
 * [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - Styling for the webpage
 * [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - Functionality for the webpage
 
-## Extra Credit
-I'm going for exceeds with an animation for the modal display and close, and fancy css for the headline. i have also included the paging in the modal and search with live search.
-
 ## Authors
 
 * **Kevin Power** - *Initial work* - [kpow](https://github.com/kpow)
