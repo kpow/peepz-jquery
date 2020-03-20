@@ -183,12 +183,12 @@ const search = (name) => {
 // event listener for clicking in people cards
 galleryContainer.addEventListener('click', (e) => {
     if( e.target.className.includes('card') ){
-\        currentItem = parseInt(getTargetID(e))
+        currentItem = parseInt(getTargetID(e))
         
         searchList.map((item, index)=>{
-\            if(item === currentItem) currentItemIndex = index
+            if(item === currentItem) currentItemIndex = index
         })
-\        displayModal(userData[currentItem], currentItemIndex)    
+        displayModal(userData[currentItem], currentItemIndex)    
     }
 })
 
